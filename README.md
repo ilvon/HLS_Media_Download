@@ -1,2 +1,2 @@
-# m3u8_Stream_Download
-Download a media stream with URL of m3u8 file
+# HLS Media Download
+Download media from a HLS-based stream with URL of the m3u8 playlist file
