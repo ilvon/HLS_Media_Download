@@ -6,7 +6,17 @@ import requests
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import unpad
 
-url = input('URL to be downloaded: ')
+file_option = input('Using online (0) or local (1) m3u8 file?: ')
+if file_option == '0':
+    file_option = False
+    url = input('URL to be downloaded: ')
+elif file_option == '1':
+    file_option = True
+    url = input('File path: ')
+else:
+    print('Invalid option. Exiting ...')
+    exit(1)
+    
 HEADER = {
     'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
     'Accept-Language':'en-US, en;q=0.9, *;q=0.5',
@@ -37,7 +47,7 @@ ffmpeg_process = (
 )
 
 
-indexObject = m3u8.load(url)
+indexObject = m3u8.loads(url) if file_option else m3u8.load(url)
 segment_amount = len(indexObject.segments)
 work_counter = 0
 print(f'\n{segment_amount} segments to be downloaded.')
